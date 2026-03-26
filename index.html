@@ -179,15 +179,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </style>
 </head>
 <body>
-<form id="form-login" onsubmit="this.style.display='none'; document.body.style.overflow='auto'; renderHome(); alert('Bem-vindo ao CenaPlay! 🍿'); return false;" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 100%; max-width: 350px; text-align: center;">
-        <div style="font-size: 40px; margin-bottom: 10px;">🎬</div>
-        <h2 style="margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif; color: #fff;">CenaPlay Login</h2>
-        
-        <input type="email" id="email-usuario" placeholder="Seu Gmail" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 15px; outline: none;">
-        
-        <input type="password" id="senha-usuario" placeholder="Sua Senha" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 20px; outline: none;">
-        
-        <button type="submit" style="width: 100%; padding: 12px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">ENTRAR</button>
+<form id="form-login" onsubmit="this.remove(); renderHome(); alert('Acesso Liberado! 🍿'); return false;" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 15px;">
+    <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 300px; text-align: center;">
+        <h2 style="color: #fff; margin-bottom: 20px;">CenaPlay Login</h2>
+        <input type="email" placeholder="Seu Gmail" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+        <input type="password" placeholder="Sua Senha" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: none;">
+        <button type="submit" style="width: 100%; padding: 10px; background: #e53e3e; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">ENTRAR</button>
     </div>
 </form>
