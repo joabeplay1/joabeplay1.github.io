@@ -879,5 +879,15 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 renderHome();</script>
+<script>
+    const formLogin = document.getElementById('form-login');
+    if (formLogin) { 
+        formLogin.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede a página de recarregar e piscar
+            const email = document.getElementById('email-usuario').value;
+            alert('AÊ! Funcionou! O e-mail que você digitou foi: ' + email);
+        });
+    }
+</script>
 </body>
 </html>
