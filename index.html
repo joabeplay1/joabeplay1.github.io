@@ -816,5 +816,46 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 renderHome();</script>
+ <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getDatabase, ref, set, onValue, onDisconnect } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCsX53vC0PWIWGK5JVMfxXeKrchvj_GhYA",
+  authDomain: "cineplay-e690b.firebaseapp.com",
+  databaseURL: "https://cineplay-e690b-default-rtdb.firebaseio.com",
+  projectId: "cineplay-e690b",
+  storageBucket: "cineplay-e690b.firebasestorage.app",
+  messagingSenderId: "840544476635",
+  appId: "1:840544476635:web:314dc0d15151b200a69bfe"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+// LOGIN
+window.login = async function() {
+  const provider = new GoogleAuthProvider();
+  await signInWithPopup(auth, provider);
+};
+
+// CONTADOR ONLINE
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const userRef = ref(db, "online/" + user.uid);
+    set(userRef, true);
+
+    onDisconnect(userRef).remove();
+
+    onValue(ref(db, "online"), (snapshot) => {
+      document.getElementById("online").innerText = snapshot.size;
+    });
+  }
+});
+</script>
+  <button onclick="login()">Entrar com Google</button>
+<h2>Usuários online: <span id="online">0</span></h2>
 </body>
 </html>
