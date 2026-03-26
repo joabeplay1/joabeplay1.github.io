@@ -175,15 +175,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </style>
 
 
+<div id="app"></div>
 
-  </style>
-</head>
-<body>
-<form id="form-login" onsubmit="this.remove(); renderHome(); alert('Acesso Liberado! 🍿'); return false;" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 15px;">
-    <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 300px; text-align: center;">
-        <h2 style="color: #fff; margin-bottom: 20px;">CenaPlay Login</h2>
-        <input type="email" placeholder="Seu Gmail" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
-        <input type="password" placeholder="Sua Senha" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: none;">
-        <button type="submit" style="width: 100%; padding: 10px; background: #e53e3e; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">ENTRAR</button>
-    </div>
-</form>
+  <form id="form-login" onsubmit="fazerLogin(); return false;" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <div style="font-size: 40px; margin-bottom: 10px;">🎬</div>
+          <h2 style="margin-bottom: 20px; font-family: sans-serif; color: #fff;">CenaPlay Login</h2>
+          <input type="email" id="user-email" placeholder="Seu Gmail" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 15px; outline: none;">
+          <input type="password" placeholder="Sua Senha" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 20px; outline: none;">
+          <button type="submit" style="width: 100%; padding: 12px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">ENTRAR</button>
+      </div>
+  </form>
+
+  <script>
+    function fazerLogin() {
+        // Remove o formulário da tela
+        const login = document.getElementById('form-login');
+        login.remove(); 
+        
+        // Avisa que deu certo
+        alert('Bem-vindo ao CenaPlay! 🍿');
+        
+        // LIGA OS FILMES (O motor do site)
+        if (typeof renderHome === 'function') {
+            renderHome();
+        } else {
+            console.log("Erro: A função renderHome não foi encontrada!");
+        }
+    }
