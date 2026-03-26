@@ -179,30 +179,34 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </style>
 </head>
 <body>
-<form id="form-login" onsubmit="return fazerLogin();"
-  <label>E-mail:</label>
-  <input type="email" id="email-usuario" placeholder="Digite seu e-mail">
-  
-  <label>Senha:</label>
-  <input type="password" id="senha-usuario" placeholder="Sua senha secreta">
-  
-  <button type="submit">Entrar</button>
-</form>
-  
-    <div class="navbar">
-       ...
-  <div id="app"></div>
- <script>
-    function fazerLogin() {
-        // Pega o formulário pelo ID
-        const login = document.getElementById('form-login');
+<form id="form-login" onsubmit="return fazerLogin();" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 100%; max-width: 350px; text-align: center;">
+        <div style="font-size: 40px; margin-bottom: 10px;">🎬</div>
+        <h2 style="margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif;">CenaPlay Login</h2>
         
-        if (login) {
-            // Esse é o comando que faz o formulário sumir!
-            login.style.display = 'none';
-            alert('Login realizado! Divirta-se no CenaPlay 🍿');
-        }
-        return false; // Impede a página de recarregar
+        <input type="email" id="email-usuario" placeholder="Seu Gmail" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 15px; outline: none;">
+        
+        <input type="password" id="senha-usuario" placeholder="Sua Senha" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 20px; outline: none;">
+        
+        <button type="submit" style="width: 100%; padding: 12px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s;">ENTRAR</button>
+    </div>
+</form>
+
+<script>
+    function fazerLogin() {
+        const loginForm = document.getElementById('form-login');
+        const email = document.getElementById('email-usuario').value;
+        
+        // Faz o login sumir
+        loginForm.style.display = 'none';
+        
+        // Mensagem de boas-vindas personalizada
+        alert('Seja bem-vindo ao CenaPlay, ' + email + '! 🍿');
+        
+        // IMPORTANTE: Isso aqui desenha os filmes na tela!
+        renderHome(); 
+        
+        return false; 
     }
 </script>
       
