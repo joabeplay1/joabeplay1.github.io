@@ -177,29 +177,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 
 <div id="app"></div>
 
-  <form id="form-login" onsubmit="fazerLogin(); return false;" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
-      <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-          <div style="font-size: 40px; margin-bottom: 10px;">🎬</div>
-          <h2 style="margin-bottom: 20px; font-family: sans-serif; color: #fff;">CenaPlay Login</h2>
-          <input type="email" id="user-email" placeholder="Seu Gmail" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 15px; outline: none;">
-          <input type="password" placeholder="Sua Senha" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; margin-bottom: 20px; outline: none;">
-          <button type="submit" style="width: 100%; padding: 12px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">ENTRAR</button>
+  <div id="login-container" style="position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center;">
+      <div style="background: #111; padding: 30px; border-radius: 12px; border: 1px solid #222; width: 320px; text-align: center;">
+          <h2 style="color: #fff; margin-bottom: 20px; font-family: sans-serif;">CenaPlay Login</h2>
+          <input type="email" id="email-campo" placeholder="Seu Gmail" required style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff;">
+          <input type="password" placeholder="Sua Senha" required style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff;">
+          <button onclick="liberarSite()" style="width: 100%; padding: 12px; background: #e53e3e; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">ENTRAR</button>
       </div>
-  </form>
+  </div>
 
   <script>
-    function fazerLogin() {
-        // Remove o formulário da tela
-        const login = document.getElementById('form-login');
-        login.remove(); 
+    function liberarSite() {
+        // 1. Deleta a tela de login
+        document.getElementById('login-container').remove();
         
-        // Avisa que deu certo
+        // 2. Avisa o usuário
         alert('Bem-vindo ao CenaPlay! 🍿');
-        
-        // LIGA OS FILMES (O motor do site)
+
+        // 3. Tenta carregar os filmes
         if (typeof renderHome === 'function') {
             renderHome();
         } else {
-            console.log("Erro: A função renderHome não foi encontrada!");
+            // Se der erro, ele avisa aqui
+            alert('Erro: O motor dos filmes sumiu! Recarregue a página.');
         }
     }
+  </script>
