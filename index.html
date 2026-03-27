@@ -1,6 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<body>
+  <!DOCTYPE html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <title>Meu App com Login</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+    <div id="g_id_onload"
+         data-client_id="661389788995-deac781hb2ndkq876pujccserja1kt86.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <hr>
+    <h1>Bem-vindo ao meu site no GitHub!</h1>
+    <p>O botão de login deve aparecer logo acima.</p>
+
+    <script>
+      function handleCredentialResponse(response) {
+         console.log("Login feito com sucesso!");
+         alert("Você se conectou! Verifique o console do navegador (F12) para ver os dados.");
+         console.log("Token JWT: " + response.credential);
+      }
+    </script>
+
+</body>
+</html>
+  661389788995-deac781hb2ndkq876pujccserja1kt86.apps.googleusercontent.com
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cine Play</title>
