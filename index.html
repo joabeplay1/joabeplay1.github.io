@@ -816,50 +816,5 @@ function saveVideo() {
 
 // ── START ─────────────────────────────────────────────────────────────────────
 renderHome();</script>
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-
-<script>
-// CONFIG (SEU FIREBASE)
-const firebaseConfig = {
-  apiKey: "AIzaSyCsX53vC0PWIWGK5JVMfxXeKrchvj_GhYA",
-  authDomain: "cineplay-e690b.firebaseapp.com",
-  databaseURL: "https://cineplay-e690b-default-rtdb.firebaseio.com",
-  projectId: "cineplay-e690b",
-  storageBucket: "cineplay-e690b.appspot.com",
-  messagingSenderId: "840544476635",
-  appId: "1:840544476635:web:db0d5231ec10b78aa69bfe"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-// LOGIN AUTOMÁTICO
-function loginGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider);
-}
-
-// CONTADOR ONLINE
-const db = firebase.database();
-const userId = Math.random().toString(36).substr(2, 9);
-const userRef = db.ref("onlineUsers/" + userId);
-
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    userRef.set(true);
-    userRef.onDisconnect().remove();
-    console.log("Logado:", user.displayName);
-  } else {
-    loginGoogle(); // força login automático
-  }
-});
-
-// CONTAR ONLINE
-db.ref("onlineUsers").on("value", snapshot => {
-  console.log("Online:", snapshot.numChildren());
-});
-</script>
 </body>
 </html>
