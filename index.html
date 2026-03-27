@@ -9,17 +9,18 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-
+<div id="meu-login-google">
     <div id="g_id_onload"
          data-client_id=661389788995-deac781hb2ndkq876pujccserja1kt86.apps.googleusercontent.com
          data-callback="handleCredentialResponse">
     </div>
     <div class="g_id_signin" data-type="standard"></div>
 
-    
+ </div>   
    <script>
   function handleCredentialResponse(response) {
     console.log("Login feito com sucesso!");
+    document.getElementById('meu-login-google').style.display = 'none';
     
     // 1. Salvamos no "caderno" do navegador que o usuário está logado
     sessionStorage.setItem('cp_auth', '1');
