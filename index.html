@@ -140,6 +140,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   .form-row{grid-template-columns:1fr;}
   .karaoke-header{gap:8px;}
 }</style>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
   <div id="app"></div>
@@ -492,6 +493,12 @@ function renderLogin() {
   document.getElementById('app').innerHTML = `
     <div class="login-page">
       <div class="login-box">
+      <div id="g_id_onload"
+     data-client_id="SEU_CLIENT_ID_AQUI"
+     data-callback="handleCredentialResponse">
+</div>
+
+<div class="g_id_signin" style="margin-top:10px;"></div>
         <div class="login-logo">🎬</div>
         <div class="login-title">Cine Play</div>
         <div class="login-sub">Digite a senha para acessar</div>
