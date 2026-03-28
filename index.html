@@ -925,6 +925,11 @@ if (isLoggedIn()) { renderHome(); } else { renderLogin(); }
     document.getElementById('auth-logged-bar').style.display = 'flex';
     document.getElementById('user-display-bar').innerText = data.name;
     
+    <div id="g_id_onload"
+     data-client_id="1052704350848-cq5vcrbfd23o6t2747b2j8i57lpfu2j1.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+<div class="g_id_signin" data-type="icon" data-shape="circle" style="margin-left: 10px; display: inline-block; vertical-align: middle;"></div>
     alert("Bem-vindo ao CinePlay, " + data.name + "!");
 };
   </script>
@@ -946,3 +951,63 @@ if (isLoggedIn()) { renderHome(); } else { renderLogin(); }
      data-callback="handleCredentialResponse">
 </div>
 <div class="g_id_signin" data-type="icon" data-shape="circle" style="margin-left: 10px;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+window.handleCredentialResponse = function(response) {
+    const data = JSON.parse(atob(response.credential.split('.')[1]));
+    document.getElementById('auth-inputs-bar').style.display = 'none';
+    document.getElementById('auth-logged-bar').style.display = 'flex';
+    document.getElementById('user-display-bar').innerText = data.name;
+    alert("Bem-vindo ao CinePlay, " + data.name + "!");
+};
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
