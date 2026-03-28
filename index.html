@@ -12,17 +12,7 @@
   --primary:#e53e3e;--primary-dark:#c53030;
   --text:#f0f0f0;--text-muted:#888;--radius:12px;
 }
-<body>
-  
-
-<script>
-  function finalizarLogin(response) {
-      // Quando o usuário loga, a tela de login some e libera o CinePlay
-      document.getElementById('tela-login').style.display = 'none';
-      console.log("Acesso liberado ao CinePlay");
-  }
-</script>
-    {font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
 
 /* LOGIN */
@@ -916,98 +906,6 @@ function saveVideo() {
 }
 
 // ── START ─────────────────────────────────────────────────────────────────────
-if (isLoggedIn()) { renderHome(); } else { renderLogin(); }
-  window.handleCredentialResponse = function(response) {
-    const data = JSON.parse(atob(response.credential.split('.')[1]));
-    
-    // Mostra o nome do usuário e libera a barra
-    document.getElementById('auth-inputs-bar').style.display = 'none';
-    document.getElementById('auth-logged-bar').style.display = 'flex';
-    document.getElementById('user-display-bar').innerText = data.name;
-    
-    <div id="g_id_onload"
-     data-client_id="1052704350848-cq5vcrbfd23o6t2747b2j8i57lpfu2j1.apps.googleusercontent.com"
-     data-callback="handleCredentialResponse">
-</div>
-<div class="g_id_signin" data-type="icon" data-shape="circle" style="margin-left: 10px; display: inline-block; vertical-align: middle;"></div>
-    alert("Bem-vindo ao CinePlay, " + data.name + "!");
-};
-  </script>
-  window.handleCredentialResponse = function(response) {
-    const data = JSON.parse(atob(response.credential.split('.')[1]));
-    
-    // Faz a mágica: esconde os campos e mostra seu nome
-    document.getElementById('auth-inputs-bar').style.display = 'none';
-    document.getElementById('auth-logged-bar').style.display = 'flex';
-    document.getElementById('user-display-bar').innerText = data.name;
-    
- <div id="g_id_onload"
-     data-client_id="1052704350848-cq5vcrbfd23o6t2747b2j8i57lpfu2j1.apps.googleusercontent.com"
-     data-callback="handleCredentialResponse">
-</div>
-
-<div class="g_id_signin" data-type="icon" data-shape="circle"></div>
-     data-client_id="1052704350848-cq5vcrbfd23o6t2747b2j8i57lpfu2j1.apps.googleusercontent.com"
-     data-callback="handleCredentialResponse">
-</div>
-<div class="g_id_signin" data-type="icon" data-shape="circle" style="margin-left: 10px;"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-window.handleCredentialResponse = function(response) {
-    const data = JSON.parse(atob(response.credential.split('.')[1]));
-    document.getElementById('auth-inputs-bar').style.display = 'none';
-    document.getElementById('auth-logged-bar').style.display = 'flex';
-    document.getElementById('user-display-bar').innerText = data.name;
-    alert("Bem-vindo ao CinePlay, " + data.name + "!");
-};
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+if (isLoggedIn()) { renderHome(); } else { renderLogin(); }</script>
+</body>
+</html>
