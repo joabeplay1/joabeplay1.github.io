@@ -3,96 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cine Play - Filmes e Chat</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-        :root {
-            --bg: #0a0a0a;
-            --primary: #e53e3e; /* O vermelho do seu Cine Play */
-            --primary-dark: #c53030;
-            --text: #f0f0f0;
-            --radius: 12px;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-        }
-
-        /* --- ESTILO DO WIDGET DE CHAT --- */
-        #chat-wrapper {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
-        #chat-iframe {
-            width: 350px;
-            height: 500px;
-            border: 2px solid var(--primary);
-            border-radius: var(--radius);
-            margin-bottom: 10px;
-            display: none; /* Começa escondido */
-            background-color: #111;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        #btn-chat {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
-            transition: 0.3s;
-        }
-
-        #btn-chat:hover {
-            background-color: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        /* Estilo para simular o resto do seu site */
-        .conteudo-exemplo {
-            padding: 50px;
-            text-align: center;
-        }
-    </style>
+    <title>Cine Play - Oficial</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="conteudo-exemplo">
-        <h1>Bem-vindo ao Cine Play 🎬</h1>
-        <p>Assista seus filmes e converse com amigos!</p>
-    </div>
+    <div id="app"></div>
 
     <div id="chat-wrapper">
         <iframe id="chat-iframe" src="https://joabeplay1.github.io/bate-papo/"></iframe>
-        
         <button id="btn-chat" onclick="toggleChat()">💬 Bate-Papo</button>
     </div>
 
-    <script>
-        function toggleChat() {
-            const chat = document.getElementById('chat-iframe');
-            // Lógica simples: se estiver escondido, mostra. Se não, esconde.
-            if (chat.style.display === 'none' || chat.style.display === '') {
-                chat.style.display = 'block';
-            } else {
-                chat.style.display = 'none';
-            }
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
