@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cine Play</title>
-
+  
   <script type='text/javascript' src='//pl25954605.highrevenuegate.com/28/94/42/28944298.js'></script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{
       --bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--border:#222;
@@ -17,8 +17,6 @@
     }
     body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
     ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
-
-    /* LOGIN */
     .login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
     .login-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;text-align:center;}
     .login-logo{width:56px;height:56px;background:var(--primary);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
@@ -30,276 +28,81 @@
     .login-btn:hover{background:var(--primary-dark);}
     .login-error{color:#f87171;font-size:13px;margin-top:10px;display:none;}
     .logout-btn{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border);padding:6px 14px;border-radius:999px;font-size:12px;cursor:pointer;transition:all .2s;}
-    .logout-btn:hover{color:var(--primary);border-color:var(--primary);}
-
-    /* NAVBAR */
     .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
     .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);cursor:pointer;border:none;background:none;}
     .logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
     .logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
-    .search-wrap{flex:1;max-width:420px;position:relative;}
-    .search-wrap input{width:100%;padding:8px 16px 8px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:14px;outline:none;}
-    .search-wrap input:focus{border-color:var(--primary);}
-    .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.5;}
-    .navbar-actions{display:flex;gap:8px;}
-    .btn-add{background:var(--primary);color:#fff;border:none;padding:8px 18px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s;}
-    .btn-add:hover{background:var(--primary-dark);}
-    .btn-karaoke{background:var(--bg3);color:var(--text);border:1px solid var(--border);padding:8px 14px;border-radius:999px;font-weight:500;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}
-    .btn-karaoke:hover{border-color:var(--primary);color:var(--primary);}
-
-    /* MAIN */
     .main{max-width:1280px;margin:0 auto;padding:24px;}
-
-    /* HERO */
-    .hero{position:relative;border-radius:var(--radius);overflow:hidden;height:280px;margin-bottom:24px;}
-    .hero img{width:100%;height:100%;object-fit:cover;}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 0%,rgba(0,0,0,.5) 50%,transparent 100%);}
-    .hero-content{position:absolute;bottom:0;left:0;padding:32px;}
-    .hero-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--primary);font-weight:700;}
-    .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4vw,36px);font-weight:700;margin-top:6px;}
-
-    /* CATEGORIES */
-    .categories{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;}
-    .categories::-webkit-scrollbar{height:0;}
-    .cat-btn{padding:7px 16px;border-radius:999px;border:none;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
-    .cat-btn.active{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(229,62,62,.3);}
-    .cat-btn:not(.active){background:var(--bg2);color:var(--text-muted);}
-    .cat-btn:not(.active):hover{color:var(--text);background:var(--bg3);}
-    .anime-subs{display:flex;gap:6px;padding:0 0 12px 12px;flex-wrap:wrap;}
-    .anime-sub-btn{padding:5px 14px;border-radius:999px;border:none;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;}
-    .anime-sub-btn.active{background:rgba(229,62,62,.8);color:#fff;}
-    .anime-sub-btn:not(.active){background:var(--bg3);color:var(--text-muted);}
-    .anime-sub-btn:not(.active):hover{color:var(--text);}
-
-    /* GRID */
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
     .card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s;}
-    .card:hover{border-color:rgba(229,62,62,.4);transform:translateY(-2px);}
     .card-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;}
-    .card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-    .card:hover .card-thumb img{transform:scale(1.08);}
-    .card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
-    .card:hover .card-overlay{opacity:1;}
-    .play-btn{width:52px;height:52px;border-radius:50%;background:rgba(229,62,62,.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-    .badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;}
-    .source-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;}
+    .card-thumb img{width:100%;height:100%;object-fit:cover;}
     .card-body{padding:12px 14px;}
-    .card-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-    .card-meta{display:flex;gap:10px;margin-top:6px;font-size:11px;color:var(--text-muted);align-items:center;}
-    .star{color:#f6c90e;}
-
-    /* EMPTY */
-    .empty{text-align:center;padding:80px 20px;color:var(--text-muted);}
-
-    /* MODAL */
-    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
-    .modal-bg.hidden{display:none;}
-    .modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;padding:28px;max-height:90vh;overflow-y:auto;}
-    .modal-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:20px;}
-    .tabs{display:flex;gap:4px;background:var(--bg3);padding:4px;border-radius:10px;margin-bottom:20px;}
-    .tab-btn{flex:1;padding:8px;background:none;border:none;color:var(--text-muted);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
-    .tab-btn.active{background:var(--primary);color:#fff;}
-    .form-group{margin-bottom:14px;}
-    .form-label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px;}
-    .form-input{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none;}
-    .form-input:focus{border-color:var(--primary);}
-    .form-textarea{resize:none;height:80px;}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .form-select{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none;}
-    .btn-save{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px;}
-    .btn-save:hover{background:var(--primary-dark);}
-    .modal-close{float:right;background:none;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;margin-top:-4px;}
-    .thumb-upload{border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;}
-    .thumb-upload:hover{border-color:var(--primary);background:rgba(229,62,62,.05);}
-    .thumb-preview{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/9;}
-    .thumb-preview img{width:100%;height:100%;object-fit:cover;}
-    .thumb-clear{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.7);border:none;border-radius:50%;width:26px;height:26px;color:#fff;cursor:pointer;font-size:16px;}
-
-    /* PLAYER */
-    .topbar{background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;}
-    .back-btn{background:none;border:none;color:var(--text-muted);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:color .2s;}
-    .back-btn:hover{color:var(--text);}
-    .player-main{max-width:1100px;margin:0 auto;padding:24px;}
-    .player-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 25px 60px rgba(0,0,0,.6);}
-    .player-wrap iframe,.player-wrap video{width:100%;height:100%;border:none;}
-    .player-info{margin-top:24px;}
-    .player-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(18px,3vw,28px);font-weight:700;}
-    .player-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:13px;color:var(--text-muted);align-items:center;}
-    .player-desc{margin-top:16px;color:var(--text-muted);line-height:1.7;max-width:800px;}
-    .pill{background:var(--bg3);padding:3px 12px;border-radius:999px;font-size:12px;}
-
-    /* KARAOKE PAGE */
-    .karaoke-header{background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
-    .karaoke-title{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
-    .karaoke-icon{background:rgba(229,62,62,.2);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;}
-    .karaoke-search-wrap{flex:1;max-width:500px;position:relative;}
-    .karaoke-search-wrap input{width:100%;padding:8px 16px 8px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:14px;outline:none;}
-    .karaoke-search-wrap input:focus{border-color:var(--primary);}
-
-    @media(max-width:600px){
-      .grid{grid-template-columns:repeat(2,1fr);}
-      .hero{height:180px;}
-      .logo-text{display:none;}
-      .form-row{grid-template-columns:1fr;}
-      .karaoke-header{gap:8px;}
-    }
+    .card-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;line-height:1.4;}
+    .topbar{background:rgba(10,10,10,.85);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;}
+    .player-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;}
+    .player-wrap iframe{width:100%;height:100%;border:none;}
+    @media(max-width:600px){ .grid{grid-template-columns:repeat(2,1fr);} .logo-text{display:none;} }
   </style>
 </head>
 <body>
   <div id="app"></div>
   <script>
     const ACCESS_PASSWORD = 'cineplay123';
-
     let videos = [
-      {
-        "id": "69ceaad2bbdc1358f5e12a9c",
-        "title": "jesus maravilha",
-        "description": "",
-        "category": "filme",
-        "anime_subcategory": "",
-        "music_subcategory": "",
-        "source": "google_drive",
-        "video_url": "https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view?usp=drive_link",
-        "thumbnail_url": "https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view?usp=drive_link",
-        "year": "",
-        "duration": "",
-        "rating": 0,
-        "is_favorite": false
-      },
-      {
-        "id": "69ce9cd72a4a7666617fb6fb",
-        "title": "jesus",
-        "description": "",
-        "category": "filme",
-        "anime_subcategory": "",
-        "music_subcategory": "",
-        "source": "google_drive",
-        "video_url": "https://drive.google.com/file/d/1YVqJ5xcgs-V5xQoF1BFTGcAEKMgNPh2u/view?usp=drive_link",
-        "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/c801db49b_PixVerse_V56_Image_Text_360P_Jesus_walking_sl.mp4",
-        "year": "",
-        "duration": "",
-        "rating": 0,
-        "is_favorite": true
-      },
-      {
-        "id": "69c5579c214cb829970d53f8",
-        "title": "SE BEBER NAO CASE 3 KKKKKKKK",
-        "description": "IRA MORRER DE RIR",
-        "category": "comedia",
-        "anime_subcategory": "",
-        "music_subcategory": "",
-        "source": "google_drive",
-        "video_url": "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/view?usp=drive_link",
-        "thumbnail_url": "",
-        "year": "",
-        "duration": "",
-        "rating": 0,
-        "is_favorite": false
-      }
-      /* Os demais vídeos continuam aqui... */
+      {"id":"1","title":"jesus maravilha","source":"google_drive","video_url":"https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view"},
+      {"id":"2","title":"jesus","source":"google_drive","video_url":"https://drive.google.com/file/d/1YVqJ5xcgs-V5xQoF1BFTGcAEKMgNPh2u/view"},
+      {"id":"3","title":"SE BEBER NAO CASE 3","source":"google_drive","video_url":"https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/view"},
+      {"id":"4","title":"VELOZES E FURIOSOS","source":"google_drive","video_url":"https://drive.google.com/file/d/14YDwXv3kqaF9ipiq4a-lp1_9gXMlXEfy/view"},
+      {"id":"5","title":"MADARA RINDO","source":"google_drive","video_url":"https://drive.google.com/file/d/10jECUzhgdp0pMcoEAGfKFUH8xDTYGziJ/view"},
+      {"id":"6","title":"ALOK COPACABANA","source":"google_drive","video_url":"https://drive.google.com/file/d/1BmudgnWJShrQifYmwl-2qBlZqM01oeAS/view"},
+      {"id":"7","title":"JOABE PLAY SINISTRO","source":"google_drive","video_url":"https://drive.google.com/file/d/1a6JNQDhN5uKCdGl0DuwfLSngkgLOcR12/view"}
     ];
-
-    let currentPage = 'home';
-    let currentCategory = 'all';
-    let currentAnimeSubcat = '';
-    let currentMusicSubcat = '';
-    let currentSearch = '';
-    let currentKaraokeSearch = '';
-    let nextId = videos.length + 1;
-    let currentThumbFile = null;
-
-    const catLabels = {
-      filme:'Filme', serie:'Série', documentario:'Documentário', animacao:'Anime',
-      musica:'Música', comedia:'Comédia', acao:'Ação', musica_ao_vivo:'Ao Vivo',
-      videos_engracados:'Engraçado', karaoke:'Karaokê', outro:'Outro'
-    };
 
     function isLoggedIn() { return sessionStorage.getItem('cp_auth') === '1'; }
 
     function renderLogin() {
       document.getElementById('app').innerHTML = `
-        <div class="login-page">
-          <div class="login-box">
-            <div class="login-logo">🎬</div>
-            <div class="login-title">Cine Play</div>
-            <div class="login-sub">Digite a senha para acessar</div>
-            <input class="login-input" type="password" id="loginPass" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')doLogin()" />
-            <button class="login-btn" onclick="doLogin()">Entrar</button>
-            <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
-          </div>
-        </div>
-      `;
-      setTimeout(() => document.getElementById('loginPass')?.focus(), 100);
+        <div class="login-page"><div class="login-box">
+          <div class="login-logo">🎬</div><div class="login-title">Cine Play</div>
+          <input class="login-input" type="password" id="loginPass" placeholder="Senha" />
+          <button class="login-btn" onclick="doLogin()">Entrar</button>
+        </div></div>`;
     }
 
     function doLogin() {
-      const val = document.getElementById('loginPass')?.value;
-      if (val === ACCESS_PASSWORD) {
-        sessionStorage.setItem('cp_auth', '1');
-        renderHome();
-      } else {
-        const err = document.getElementById('loginError');
-        if (err) { err.style.display = 'block'; }
+      if(document.getElementById('loginPass').value === ACCESS_PASSWORD){
+        sessionStorage.setItem('cp_auth', '1'); renderHome();
       }
     }
 
     function renderHome() {
-      if (!isLoggedIn()) { renderLogin(); return; }
-      currentPage = 'home';
+      if(!isLoggedIn()){ renderLogin(); return; }
       document.getElementById('app').innerHTML = `
-        <nav class="navbar">
-          <button class="logo" onclick="renderHome()">
-            <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
-          </button>
-          <div class="search-wrap">
-            <span class="search-icon">🔍</span>
-            <input id="searchInput" type="text" placeholder="Buscar..." value="${currentSearch}" oninput="onSearch(this.value)" />
-          </div>
-          <div class="navbar-actions">
-            <button class="btn-karaoke" onclick="renderKaraoke()">🎙 Karaokê</button>
-            <button class="btn-add" onclick="openModal()">+ Adicionar</button>
-            <button class="logout-btn" onclick="sessionStorage.clear(); location.reload();">Sair</button>
-          </div>
-        </nav>
-        <div class="main">
-          <div id="gridWrap"></div>
-        </div>
-      `;
-      renderGrid();
-    }
-
-    function renderGrid() {
-      const w = document.getElementById('gridWrap');
-      if (!w) return;
-      w.innerHTML = '<div class="grid">' + videos.map(v => `
+        <nav class="navbar"><div class="logo"><div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span></div>
+        <button class="logout-btn" onclick="sessionStorage.clear(); location.reload();">Sair</button></nav>
+        <div class="main"><div class="grid" id="grid"></div></div>`;
+      const grid = document.getElementById('grid');
+      grid.innerHTML = videos.map(v => `
         <div class="card" onclick="playVideo('${v.id}')">
-          <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&q=80" />
-            <div class="card-overlay"><button class="play-btn">▶</button></div>
-          </div>
-          <div class="card-body">
-            <div class="card-title">${v.title}</div>
-          </div>
-        </div>`).join('') + '</div>';
+          <div class="card-thumb"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600" /></div>
+          <div class="card-body"><div class="card-title">${v.title}</div></div>
+        </div>`).join('');
     }
 
     function playVideo(id) {
       const v = videos.find(x => x.id == id);
-      let embedUrl = v.video_url;
-      if (v.source === 'google_drive') {
-        const fId = v.video_url.match(/\/d\/([a-zA-Z0-9_-]+)/)[1];
-        embedUrl = `https://drive.google.com/file/d/${fId}/preview`;
-      }
+      const fId = v.video_url.match(/\/d\/([a-zA-Z0-9_-]+)/)[1];
+      const embedUrl = `https://drive.google.com/file/d/${fId}/preview`;
       document.getElementById('app').innerHTML = `
-        <div class="topbar"><button class="back-btn" onclick="renderHome()">← Voltar</button></div>
-        <div class="player-main">
-          <div class="player-wrap"><iframe src="${embedUrl}" allowfullscreen></iframe></div>
-          <h1 style="margin-top:20px">${v.title}</h1>
-        </div>
-      `;
+        <div class="topbar"><button onclick="renderHome()" style="background:none;border:none;color:#888;cursor:pointer;">← Voltar</button></div>
+        <div class="player-main" style="padding:20px;">
+          <div class="player-wrap"><iframe src="${embedUrl}" allow="autoplay" allowfullscreen></iframe></div>
+          <h2 style="margin-top:20px;">${v.title}</h2>
+        </div>`;
     }
 
-    if (isLoggedIn()) { renderHome(); } else { renderLogin(); }
+    if(isLoggedIn()){ renderHome(); } else { renderLogin(); }
   </script>
 </body>
 </html>
