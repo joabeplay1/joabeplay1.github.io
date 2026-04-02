@@ -4,62 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cine Play</title>
-  
-  <script type='text/javascript' src='//pl25954605.highrevenuegate.com/28/94/42/28944298.js'></script>
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{
       --bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--border:#222;
       --primary:#e53e3e;--primary-dark:#c53030;
       --text:#f0f0f0;--text-muted:#888;--radius:12px;
     }
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-    ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
+    
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
     
     /* LOGIN */
     .login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
     .login-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:400px;text-align:center;}
     .login-logo{width:56px;height:56px;background:var(--primary);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
     .login-title{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px;}
-    .login-sub{color:var(--text-muted);font-size:14px;margin-bottom:28px;}
     .login-input{width:100%;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
-    .login-input:focus{border-color:var(--primary);}
-    .login-btn{width:100%;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:4px;}
-    .login-btn:hover{background:var(--primary-dark);}
-    
+    .login-btn{width:100%;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;width:100%;}
+
     /* NAVBAR */
-    .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);cursor:pointer;border:none;background:none;}
-    .logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
-    .logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
-    
-    /* HERO */
-    .hero{position:relative;border-radius:var(--radius);overflow:hidden;height:320px;margin-bottom:24px;background:#000;}
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+    .logo{display:flex;align-items:center;gap:10px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+    .logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+
+    /* HERO CAPA */
+    .hero{position:relative;border-radius:var(--radius);overflow:hidden;height:350px;margin-bottom:24px;background:#000;}
     .hero video, .hero img{width:100%;height:100%;object-fit:cover;}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.9) 0%,rgba(0,0,0,0.4) 60%,transparent 100%);}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.9) 0%, transparent 100%);}
     .hero-content{position:absolute;bottom:0;left:0;padding:40px;z-index:2;}
-    .hero-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--primary);font-weight:700;margin-bottom:8px;}
-    .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,5vw,42px);font-weight:700;line-height:1.1;}
-    
+    .hero-title{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;}
+
     /* GRID */
     .main{max-width:1280px;margin:0 auto;padding:24px;}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;}
-    .card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform 0.3s;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;}
+    .card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:0.3s;}
     .card:hover{transform:scale(1.03);border-color:var(--primary);}
-    .card-thumb{position:relative;aspect-ratio:16/9;background:var(--bg3);}
+    .card-thumb{aspect-ratio:16/9;background:var(--bg3);overflow:hidden;}
     .card-thumb img{width:100%;height:100%;object-fit:cover;}
     .card-body{padding:12px;}
-    .card-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
     /* PLAYER */
-    .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;}
-    .back-btn{background:none;border:none;color:var(--text);cursor:pointer;font-weight:600;display:flex;align-items:center;gap:8px;}
-    .player-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;margin-top:20px;}
+    .player-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;}
     .player-wrap iframe{width:100%;height:100%;border:none;}
+    .back-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:999px;cursor:pointer;margin-bottom:20px;}
 
-    @media(max-width:600px){ .grid{grid-template-columns:repeat(2,1fr);} .logo-text{display:none;} .hero{height:220px;} }
+    @media(max-width:600px){ .grid{grid-template-columns:repeat(2,1fr);} .hero{height:220px;} }
   </style>
 </head>
 <body>
@@ -68,49 +59,30 @@
   <script>
     const ACCESS_PASSWORD = 'cineplay123';
     
-    // Lista de Vídeos Atualizada
     let videos = [
       {
         "id": "v1",
-        "title": "Jesus",
-        "source": "url_direta",
+        "title": "Jesus Caminhando",
         "video_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/c801db49b_PixVerse_V56_Image_Text_360P_Jesus_walking_sl.mp4",
-        "category": "filme"
+        "source": "url_direta"
       },
       {
         "id": "v2",
         "title": "Jesus Maravilha",
-        "source": "google_drive",
         "video_url": "https://drive.google.com/file/d/16NuCHOmSrfANSMqts5xDZm4rueTLfUAQ/view",
-        "category": "filme"
+        "source": "google_drive"
       },
       {
         "id": "v3",
         "title": "Se Beber Não Case 3",
-        "source": "google_drive",
         "video_url": "https://drive.google.com/file/d/1mGim8GitvsKo7r2k_bO3-ziXsD-eCSs9/view",
-        "category": "comedia"
+        "source": "google_drive"
       },
       {
         "id": "v4",
         "title": "Velozes e Furiosos",
-        "source": "google_drive",
         "video_url": "https://drive.google.com/file/d/14YDwXv3kqaF9ipiq4a-lp1_9gXMlXEfy/view",
-        "category": "comedia"
-      },
-      {
-        "id": "v5",
-        "title": "Madara Rindo",
-        "source": "google_drive",
-        "video_url": "https://drive.google.com/file/d/10jECUzhgdp0pMcoEAGfKFUH8xDTYGziJ/view",
-        "category": "animacao"
-      },
-      {
-        "id": "v6",
-        "title": "Alok Copacabana 2026",
-        "source": "google_drive",
-        "video_url": "https://drive.google.com/file/d/1BmudgnWJShrQifYmwl-2qBlZqM01oeAS/view",
-        "category": "musica_ao_vivo"
+        "source": "google_drive"
       }
     ];
 
@@ -121,9 +93,8 @@
         <div class="login-page">
           <div class="login-box">
             <div class="login-logo">🎬</div>
-            <div class="login-title">Cine Play</div>
-            <p class="login-sub">Digite a senha para acessar</p>
-            <input class="login-input" type="password" id="loginPass" placeholder="Senha" />
+            <h1 class="login-title">Cine Play</h1>
+            <input class="login-input" type="password" id="loginPass" placeholder="Digite a senha" />
             <button class="login-btn" onclick="doLogin()">Entrar</button>
           </div>
         </div>`;
@@ -136,39 +107,36 @@
       } else { alert('Senha incorreta!'); }
     }
 
-    function renderHero() {
-      const v = videos[0]; // Jesus como destaque (MP4 Direto)
-      const heroHtml = `
-        <div class="hero">
-          <video src="${v.video_url}" autoplay loop muted playsinline></video>
-          <div class="hero-overlay"></div>
-          <div class="hero-content">
-            <div class="hero-label">⭐ Em Destaque</div>
-            <h2 class="hero-title">${v.title}</h2>
-          </div>
-        </div>`;
-      document.getElementById('heroWrap').innerHTML = heroHtml;
-    }
-
     function renderHome() {
       if(!isLoggedIn()) { renderLogin(); return; }
+      
       document.getElementById('app').innerHTML = `
         <nav class="navbar">
-          <div class="logo"><div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span></div>
-          <button onclick="sessionStorage.clear(); location.reload();" style="background:none;border:1px solid #444;color:#ccc;padding:5px 15px;border-radius:20px;cursor:pointer;">Sair</button>
+          <div class="logo"><div class="logo-icon">🎬</div> Cine Play</div>
+          <button onclick="sessionStorage.clear(); location.reload();" style="background:none;border:none;color:#888;cursor:pointer;">Sair</button>
         </nav>
         <div class="main">
           <div id="heroWrap"></div>
           <div class="grid" id="videoGrid"></div>
         </div>`;
       
-      renderHero();
-      
+      // Renderiza a Capa com Vídeo Automático (Jesus)
+      const vHero = videos[0];
+      document.getElementById('heroWrap').innerHTML = `
+        <div class="hero">
+          <video src="${vHero.video_url}" autoplay loop muted playsinline></video>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <h2 class="hero-title">${vHero.title}</h2>
+          </div>
+        </div>`;
+
+      // Renderiza a Grade de Vídeos
       const grid = document.getElementById('videoGrid');
       grid.innerHTML = videos.map(v => `
         <div class="card" onclick="playVideo('${v.id}')">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400" alt="${v.title}">
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400" />
           </div>
           <div class="card-body">
             <div class="card-title">${v.title}</div>
@@ -187,12 +155,12 @@
       }
 
       document.getElementById('app').innerHTML = `
-        <div class="topbar"><button class="back-btn" onclick="renderHome()">← Voltar</button></div>
-        <div style="padding:20px; max-width:1100px; margin:0 auto;">
+        <div class="main">
+          <button class="back-btn" onclick="renderHome()">← Voltar</button>
           <div class="player-wrap">
             <iframe src="${embedUrl}" allow="autoplay" allowfullscreen></iframe>
           </div>
-          <h1 style="margin-top:20px; font-family:'Space Grotesk';">${v.title}</h1>
+          <h1 style="margin-top:20px;">${v.title}</h1>
         </div>`;
     }
 
