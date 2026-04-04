@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -191,15 +190,15 @@ const ACCESS_PASSWORD = 'cineplay123';
 
 let videos = [
   {
-    "id": "69d1335f8258dfabc8459ed8",
-    "title": "Bad Bunny's Apple Music Super Bowl Halftime Show",
-    "description": "Bad Bunny: El Apagón del Super Bowl\nA Sinopse\nEm 2020, o mundo parou para assistir ao Super Bowl LIV, mas foi o furacão vindo de Porto Rico que mudou o jogo para sempre. Bad Bunny: El Apagón del Super Bowl mergulha nos bastidores da histórica apresentação de Benito Antonio Martínez Ocasio ao lado de Shakira e Jennifer Lopez, capturando o momento exato em que o reggaeton e o trap latino reivindicaram seu trono no maior palco da cultura pop americana.\n\nO especial combina imagens inéditas de ensaios, a adrenalina do túnel antes da entrada triunfal em seu terno prateado e depoimentos sobre a importância política de levar o espanhol — sem legendas e sem desculpas — para o coração dos Estados Unidos.\n\nDestaques da Trama\nA Invasão Latina: O desafio de condensar a energia de \"I Like It\" e \"Callaíta\" em poucos minutos de pura explosão cultural.\n\nRepresentatividade: O simbolismo de ver um artista independente de Vega Baja alcançar o ápice da indústria musical global.\n\nO Estilo Benito: A escolha estética que rompeu barreiras de gênero e moda em um ambiente tradicionalmente esportivo e conservador.\n\nO Que Esperar\n\"Não foi apenas um show de intervalo; foi um manifesto. Bad Bunny não se adaptou ao Super Bowl; o Super Bowl teve que aprender a falar a língua do Benito.\"\n\nGênero: Documentário Musical / Especial de Concerto\nVibe: Energética, Colorida e Revolucionária",
+    "id": "69d13854a2e2fcae66dd6af6",
+    "title": "Bad Bunny:  Super Bowl",
+    "description": "contemporânea: Lady Gaga e Tony Bennett (representado aqui em uma de suas célebres apresentações conjuntas). A cena transborda elegância e afeto, ilustrando a ponte entre o Jazz clássico 🎺 e o Pop moderno 🎤.Lady Gaga e Tony Bennett sempre trouxeram uma produção visual que mistura o luxo clássico com um toque de modernidade. Na foto, as roupas e a iluminação ao fundo criam uma atmosfera que nos transporta para outra época.A linguagem corporal é, sem dúvida, um dos pontos mais fortes dessa imagem. Ela transforma uma simples apresentação em uma narrativa de admiração mútua e amizade profunda. 🤝\n\nNote como o contato visual direto e o sorriso compartilhado criam uma \"bolha\" de intimidade, mesmo em um palco cercado por músicos e luzes. Essa proximidade física não é apenas coreografada; ela transmite uma passagem de bastão emocional entre o mestre do Jazz e a estrela que mantém esse legado vivo. 🌟",
     "category": "musica_ao_vivo",
     "anime_subcategory": "",
     "music_subcategory": "",
-    "source": "youtube",
-    "video_url": "https://youtu.be/G6FuWd4wNd8?si=0KShVbq_j3N39iBt",
-    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/cfc127ab0_Gemini_Generated_Image_90kqfp90kqfp90kq.png",
+    "source": "google_drive",
+    "video_url": "https://drive.google.com/file/d/11Mt_xZPqjDyE03HEf8BDoDYQ38yNmaLD/view?usp=sharing",
+    "thumbnail_url": "https://base44.app/api/apps/69c40e1fd9cca13236f6ac8c/files/mp/public/69c40e1fd9cca13236f6ac8c/099488f37_Gemini_Generated_Image_90kqfp90kqfp90kq.png",
     "year": "",
     "duration": "",
     "rating": 0,
@@ -473,7 +472,7 @@ let videos = [
     "year": "",
     "duration": "",
     "rating": 0,
-    "is_favorite": false
+    "is_favorite": true
   },
   {
     "id": "69cf18c56cdc7176ad66e124",
