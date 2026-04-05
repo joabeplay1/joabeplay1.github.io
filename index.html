@@ -97,6 +97,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 /* EMPTY */
 .empty{text-align:center;padding:80px 20px;color:var(--text-muted);}
 
+/* DETAIL MODAL */
+.detail-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:300;padding:16px;}
+.detail-bg.hidden{display:none;}
+.detail-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:600px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.7);}
+.detail-cover{position:relative;aspect-ratio:16/9;width:100%;background:#000;overflow:hidden;}
+.detail-cover img,.detail-cover video{width:100%;height:100%;object-fit:cover;}
+.detail-cover iframe{width:100%;height:100%;border:none;pointer-events:none;}
+.detail-gradient{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 60%);}
+.detail-close{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.6);border:none;border-radius:50%;width:32px;height:32px;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.detail-close:hover{background:rgba(0,0,0,.9);}
+.detail-cat-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:4px 10px;border-radius:6px;font-weight:600;}
+.detail-body{padding:20px 24px 24px;}
+.detail-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;line-height:1.3;margin-bottom:10px;}
+.detail-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--text-muted);margin-bottom:14px;align-items:center;}
+.detail-meta .pill{background:var(--bg3);padding:3px 10px;border-radius:999px;font-size:12px;}
+.detail-desc{color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:20px;}
+.detail-actions{display:flex;gap:10px;}
+.btn-watch{flex:1;padding:13px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s;}
+.btn-watch:hover{background:var(--primary-dark);}
+.btn-fav{padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text-muted);font-size:20px;cursor:pointer;transition:all .2s;}
+.btn-fav:hover{border-color:var(--primary);color:var(--primary);}
+.btn-fav.active{color:#e53e3e;}
+
 /* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
 .modal-bg.hidden{display:none;}
@@ -1099,6 +1122,12 @@ function renderHome() {
       <div id="subMenuWrap"></div>
       <div id="gridWrap"></div>
     </div>
+    <div class="detail-bg hidden" id="detailBg" onclick="closeDetail(event)">
+      <div class="detail-box" id="detailBox">
+        <div class="detail-cover" id="detailCover"></div>
+        <div class="detail-body" id="detailBody"></div>
+      </div>
+    </div>
     <div class="modal-bg hidden" id="modalBg">
       <div class="modal">
         <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1298,22 +1327,22 @@ function renderGrid() {
   if (!f.length) { w.innerHTML='<div class="empty"><div style="font-size:64px;opacity:.3;margin-bottom:16px">🎬</div><p style="font-size:18px;font-weight:600">Nenhum vídeo encontrado</p></div>'; return; }
   w.innerHTML = '<div class="grid">' + f.map(v=>`
     <div class="card">
-      <div class="card-thumb" onclick="playVideo('${v.id}')" style="cursor:pointer">
+      <div class="card-thumb" onclick="openDetail('${v.id}')" style="cursor:pointer">
         ${getThumbHtml(v)}
         <div class="card-overlay"><button class="play-btn">▶</button></div>
-        <span class="badge">${catLabels[v.category]||v.category}${v.anime_subcategory?(' · '+(animeSubLabels[v.anime_subcategory]||''))  :''}</span>
+        <span class="badge">${catLabels[v.category]||v.category}${v.anime_subcategory?(' · '+(animeSubLabels[v.anime_subcategory]||'')):''}</span>
         <span class="source-badge">${v.source==='youtube'?'YouTube':v.source==='google_drive'?'Drive':'URL'}</span>
       </div>
       <div class="card-body">
-        <div class="card-title" onclick="playVideo('${v.id}')" style="cursor:pointer">${v.title}</div>
+        <div class="card-title" onclick="openDetail('${v.id}')" style="cursor:pointer">${v.title}</div>
         <div class="card-meta">
           ${v.year?'<span>'+v.year+'</span>':''}
           ${v.duration?'<span>⏱ '+v.duration+'</span>':''}
           ${v.rating?'<span class="star">★ '+v.rating+'</span>':''}
         </div>
         <div class="card-actions">
-          <button class="btn-edit" onclick="openEditModal('${v.id}')">✏️ Editar</button>
-          <button class="btn-delete" id="delbtn_${v.id}" onclick="confirmDelete('${v.id}')">🗑 Excluir</button>
+          <button class="btn-edit" onclick="event.stopPropagation();openEditModal('${v.id}')">✏️ Editar</button>
+          <button class="btn-delete" id="delbtn_${v.id}" onclick="event.stopPropagation();confirmDelete('${v.id}')">🗑 Excluir</button>
         </div>
       </div>
     </div>
@@ -1355,6 +1384,74 @@ function openEditModal(id) {
   if (v.music_subcategory) document.getElementById('musicSubcat').value = v.music_subcategory;
   selectTab(v.source || 'youtube');
   currentThumbFile = null;
+}
+
+// ── DETAIL MODAL ─────────────────────────────────────────────────────────────
+function openDetail(id) {
+  const v = videos.find(x => x.id == id);
+  if (!v) return;
+  const bg = document.getElementById('detailBg');
+  const cover = document.getElementById('detailCover');
+  const body = document.getElementById('detailBody');
+  if (!bg || !cover || !body) return;
+
+  // Cover media
+  const thumb = getThumbnail(v);
+  const tUrl = v.thumbnail_url;
+  let coverHtml = '';
+  if (tUrl && isVideoThumb(tUrl)) {
+    if (tUrl.includes('drive.google.com')) {
+      coverHtml = '<iframe src="' + getDriveEmbedUrl(tUrl) + '" style="width:100%;height:100%;border:none;pointer-events:none" allow="autoplay" title="' + v.title + '"></iframe>';
+    } else {
+      coverHtml = '<video src="' + tUrl + '" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>';
+    }
+  } else {
+    coverHtml = '<img src="' + thumb + '" alt="' + v.title + '" style="width:100%;height:100%;object-fit:cover" />';
+  }
+  cover.innerHTML = coverHtml + `
+    <div class="detail-gradient"></div>
+    <button class="detail-close" onclick="closeDetail()">✕</button>
+    <span class="detail-cat-badge">${catLabels[v.category]||v.category}</span>
+  `;
+
+  // Body
+  const favClass = v.is_favorite ? 'active' : '';
+  body.innerHTML = `
+    <div class="detail-title">${v.title}</div>
+    <div class="detail-meta">
+      ${v.year ? '<span>📅 '+v.year+'</span>' : ''}
+      ${v.duration ? '<span>⏱ '+v.duration+'</span>' : ''}
+      ${v.rating ? '<span style="color:#f6c90e">★ '+v.rating+'/10</span>' : ''}
+      <span class="pill">${v.source==='youtube'?'YouTube':v.source==='google_drive'?'Drive':'URL Direta'}</span>
+    </div>
+    ${v.description ? '<div class="detail-desc">'+v.description+'</div>' : ''}
+    <div class="detail-actions">
+      <button class="btn-watch" onclick="closeDetail();playVideo('${v.id}')">▶ Assistir Agora</button>
+      <button class="btn-fav ${favClass}" id="favBtn_${v.id}" onclick="toggleFavDetail('${v.id}')">${v.is_favorite ? '❤️' : '🤍'}</button>
+    </div>
+  `;
+
+  bg.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail(e) {
+  if (e && e.target !== document.getElementById('detailBg')) return;
+  const bg = document.getElementById('detailBg');
+  if (bg) bg.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function toggleFavDetail(id) {
+  const v = videos.find(x => x.id == id);
+  if (!v) return;
+  v.is_favorite = !v.is_favorite;
+  const btn = document.getElementById('favBtn_' + id);
+  if (btn) {
+    btn.textContent = v.is_favorite ? '❤️' : '🤍';
+    btn.classList.toggle('active', v.is_favorite);
+  }
+  renderGrid();
 }
 
 // ── FERRAMENTAS ───────────────────────────────────────────────────────────────
@@ -1554,17 +1651,17 @@ function renderKaraokeGrid() {
   if (!list.length) { w.innerHTML = '<div class="empty"><div style="font-size:64px;opacity:.3;margin-bottom:16px">🎙</div><p style="font-size:18px;font-weight:600">' + (currentKaraokeSearch ? 'Nenhuma música encontrada' : 'Nenhuma música de karaokê adicionada') + '</p></div>'; return; }
   w.innerHTML = '<div class="grid">' + list.map(v=>`
     <div class="card">
-      <div class="card-thumb" onclick="playVideo('${v.id}')" style="cursor:pointer">
+      <div class="card-thumb" onclick="openDetail('${v.id}')" style="cursor:pointer">
         ${getThumbHtml(v)}
         <div class="card-overlay"><button class="play-btn">▶</button></div>
         <span class="badge">🎙 Karaokê</span>
       </div>
       <div class="card-body">
-        <div class="card-title" onclick="playVideo('${v.id}')" style="cursor:pointer">${v.title}</div>
+        <div class="card-title" onclick="openDetail('${v.id}')" style="cursor:pointer">${v.title}</div>
         <div class="card-meta">${v.year?'<span>'+v.year+'</span>':''}</div>
         <div class="card-actions">
-          <button class="btn-edit" onclick="openEditModal('${v.id}')">✏️ Editar</button>
-          <button class="btn-delete" id="delbtn_${v.id}" onclick="confirmDelete('${v.id}')">🗑 Excluir</button>
+          <button class="btn-edit" onclick="event.stopPropagation();openEditModal('${v.id}')">✏️ Editar</button>
+          <button class="btn-delete" id="delbtn_${v.id}" onclick="event.stopPropagation();confirmDelete('${v.id}')">🗑 Excluir</button>
         </div>
       </div>
     </div>
