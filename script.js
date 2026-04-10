@@ -1856,27 +1856,59 @@ function bibliaBuscar(val) {
   bibliaSearch = val;
 }
 
-function bibliaAbrirCapitulos(id) {
-  bibliaLivro = LIVROS_BIBLIA.find(l=>l.id===id);
-  if (!bibliaLivro) return;
-  const caps = Array.from({length:bibliaLivro.caps},(_,i)=>i+1);
-  document.getElementById('app').innerHTML = `
-    <div class="tools-header">
-      <button class="back-btn" onclick="renderBiblia()">← Livros</button>
-      <div class="tools-title">📖 ${bibliaLivro.nome}</div>
-    </div>
-    <div class="main" style="max-width:600px">
-      <p style="color:var(--text-muted);font-size:13px;margin-bottom:16px">Selecione um capítulo:</p>
-      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px">
-        ${caps.map(c=>`<button class="calc-btn" onclick="bibliaAbrirCap(${c})" style="height:48px">${c}</button>`).join('')}
-      </div>
-    </div>
-  `;
-}
-
-async function bibliaAbrirCap(cap) {
+function async function bibliaAbrirCap(cap) {
   bibliaCap = cap;
   if (!bibliaLivro) return;
+
+  // 1. Monta a tela de leitura
+  document.getElementById('app').innerHTML = `
+    <div class="tools-header">
+      <button class="back-btn" onclick="bibliaAbrirCapitulos('${bibliaLivro.id}')">← ${bibliaLivro.nome}</button>
+      <div class="tools-title">${bibliaLivro.nome} ${cap}</div>
+      ${cap > 1 ? `<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap-1})">◀ Cap.${cap-1}</button>` : ''}
+      ${cap < bibliaLivro.caps ? `<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap+1})">Cap.${cap+1} ▶</button>` : ''}
+    </div>
+    <div class="main" style="max-width:700px" id="bibliaContent">
+      <div style="text-align:center;padding:40px;color:var(--text-muted)">⏳ Carregando Palavra...</div>
+    </div>
+  `;
+
+  try {
+    // 2. BUSCA NA API (Aqui é onde o erro de "vazio" desaparece)
+    // Usamos um nome de livro que a API entende (baseado no ID que você já tem)
+    const resp = await fetch(`https://bible-api.com/${bibliaLivro.nome}+${cap}?translation=almeida`);
+    const data = await resp.json();
+
+    const content = document.getElementById('bibliaContent');
+    if (!content) return;
+
+    if (data.verses && data.verses.length > 0) {
+      // 3. Monta os versículos na tela
+      const html = data.verses.map(v => `
+        <div style="padding:10px 14px;border-radius:10px;margin-bottom:4px;transition:background .2s">
+          <span style="color:#f6a623;font-weight:700;font-size:12px;margin-right:8px">${v.verse}</span>
+          <span style="line-height:1.8;font-size:15px;color:white">${v.text}</span>
+        </div>
+      `).join('');
+
+      content.innerHTML = `
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#f6a623;margin-bottom:20px;text-align:center">
+          ${bibliaLivro.nome} — Capítulo ${cap}
+        </h2>
+        ${html}
+        <div style="display:flex;justify-content:space-between;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">
+          ${cap > 1 ? `<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap-1})">◀ Capítulo ${cap-1}</button>` : '<span></span>'}
+          ${cap < bibliaLivro.caps ? `<button class="btn-karaoke" onclick="bibliaAbrirCap(${cap+1})">Capítulo ${cap+1} ▶</button>` : '<span></span>'}
+        </div>
+      `;
+    } else {
+      content.innerHTML = '<p style="color:white;text-align:center;padding:40px">Não encontramos o texto deste capítulo.</p>';
+    }
+  } catch (e) {
+    const content = document.getElementById('bibliaContent');
+    if (content) content.innerHTML = '<p style="color:red;text-align:center;padding:40px">Erro de conexão. Verifique sua internet.</p>';
+  }
+}
   document.getElementById('app').innerHTML = `
     <div class="tools-header">
       <button class="back-btn" onclick="bibliaAbrirCapitulos('${bibliaLivro.id}')">← ${bibliaLivro.nome}</button>
