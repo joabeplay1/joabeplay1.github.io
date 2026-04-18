@@ -1115,20 +1115,28 @@ function registrarUsuarioOnline(nome) {
 }
 
 function abrirPainelOnline() {
-  const list = document.getElementById('onlineUsersList');
-  const users = JSON.parse(localStorage.getItem(ONLINE_KEY) || '[]').filter(u => Date.now() - u.ts < 5 * 60 * 1000);
-  list.innerHTML = users.map(u => `<div class="online-user-item">
-    <div class="online-user-avatar" style="background:#e53e3e">${u.nome.charAt(0).toUpperCase()}</div>
-    <div style="font-size:13px; color:#fff">${u.nome} <br> <small style="color:#4ade80">● online agora</small></div>
-  </div>`).join('');
-  document.getElementById('onlinePanel').classList.toggle('show');
+  try {
+    const list = document.getElementById('onlineUsersList');
+    const users = JSON.parse(localStorage.getItem(ONLINE_KEY) || '[]');
+    const onlineNow = users.filter(u => Date.now() - u.ts < 5 * 60 * 1000);
+    if (list) {
+      list.innerHTML = onlineNow.map(u => `<div class="online-user-item">
+        <div class="online-user-avatar" style="background:#e53e3e">${u.nome.charAt(0).toUpperCase()}</div>
+        <div style="font-size:13px; color:#fff">${u.nome} <br> <small style="color:#4ade80">● online agora</small></div>
+      </div>`).join('');
+    }
+    document.getElementById('onlinePanel')?.classList.toggle('show');
+  } catch (e) { console.error("Erro ao abrir painel:", e); }
 }
 
 function doLogin() {
   const nome = document.getElementById('loginNome')?.value?.trim();
   const pass = document.getElementById('loginPass')?.value;
   
-  if (!nome) { alert("Por favor, digite seu nome."); return; }
+  if (!nome) { 
+    alert("Por favor, digite seu nome."); 
+    return; 
+  }
 
   if (pass === ACCESS_PASSWORD) {
     sessionStorage.setItem('cp_auth', '1');
@@ -1136,11 +1144,26 @@ function doLogin() {
     registrarUsuarioOnline(nome);
     renderHome();
   } else {
-    document.getElementById('loginError').style.display = 'block';
+    const errorEl = document.getElementById('loginError');
+    if (errorEl) errorEl.style.display = 'block';
+  
+
+function registrarUsuarioOnline(nome) {
+  try {
+    const agora = Date.now();
+    let users = JSON.parse(localStorage.getItem(ONLINE_KEY) || '[]');
+    users = users.filter(u => agora - u.ts < 5 * 60 * 1000);
+    const idx = users.findIndex(u => u.nome === nome);
+    if (idx >= 0) {
+      users[idx].ts = agora; 
+    } else {
+      users.push({ nome, ts: agora });
+    }
+    localStorage.setItem(ONLINE_KEY, JSON.stringify(users));
+  } catch (e) { 
+    console.log("Acesso ao storage bloqueado ou cheio."); 
   }
 }
-}
-
 function doLogout() {
   sessionStorage.removeItem('cp_auth');
   renderLogin();
