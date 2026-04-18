@@ -1073,14 +1073,30 @@ function renderLogin() {
       <div class="login-box">
         <div class="login-logo">🎬</div>
         <div class="login-title">Cine Play</div>
-        <div class="login-sub">Digite a senha para acessar</div>
-        <input class="login-input" type="password" id="loginPass" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')doLogin()" />
-        <button class="login-btn" onclick="doLogin()">Entrar</button>
-        <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
+        <div class="login-sub">Preencha seus dados para acessar</div>
+        <input class="login-input" type="text" id="loginNome" placeholder="Seu nome completo *" maxlength="50" />
+        <input class="login-input" type="password" id="loginPass" placeholder="Senha de acesso *" onkeydown="if(event.key==='Enter')doLogin()" />
+        <button class="login-btn" onclick="doLogin()">▶ Entrar no CinePlay</button>
+        <div class="login-error" id="loginError" style="display:none; color:#f87171; font-size:13px; margin-top:10px;">Verifique os dados.</div>
       </div>
-    </div>
-  `;
-  setTimeout(() => document.getElementById('loginPass')?.focus(), 100);
+    </div>`;
+  setTimeout(() => document.getElementById('loginNome')?.focus(), 100);
+}
+
+function doLogin() {
+  const nome = document.getElementById('loginNome')?.value?.trim();
+  const pass = document.getElementById('loginPass')?.value;
+  
+  if (!nome) { alert("Por favor, digite seu nome."); return; }
+
+  if (pass === ACCESS_PASSWORD) {
+    sessionStorage.setItem('cp_auth', '1');
+    sessionStorage.setItem('cp_nome', nome); // SALVA O NOME
+    registrarUsuarioOnline(nome); // CHAMA O MONITORAMENTO
+    renderHome();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
 }
 
 function doLogin() {
@@ -1148,7 +1164,7 @@ function renderHome() {
   ];
 
   document.getElementById('app').innerHTML = `
-    <nav class="navbar">
+   <nav class="navbar">
       <button class="logo" onclick="renderHome()">
         <div class="logo-icon">🎬</div><span class="logo-text">Cine Play</span>
       </button>
@@ -1156,16 +1172,16 @@ function renderHome() {
         <span class="search-icon">🔍</span>
         <input id="searchInput" type="text" placeholder="Buscar..." value="${currentSearch}" oninput="onSearch(this.value)" />
       </div>
-   <div class="navbar-actions">
-   <button class="btn-karaoke" onclick="renderBiblia()">📖 Bíblia</button>
-   
-   <div class="menu-item" onclick="abrirJogo('https://joabeplay1.github.io/domino-9999/')" style="cursor:pointer; background:var(--bg3); color:var(--text); border:1px solid var(--border); padding:8px 14px; border-radius:999px; font-weight:500; font-size:13px; display:flex; align-items:center; gap:6px;">
-     🀫 Dominó
-   </div>
-
-   <button class="btn-karaoke" onclick="renderFerramentas()">🔧 Ferramentas</button>
-   ...
-</div>
+      <div class="navbar-actions">
+        <button class="btn-karaoke" onclick="abrirPainelOnline()">👥 Online</button>
+        
+        <button class="btn-karaoke" onclick="renderBiblia()">📖 Bíblia</button>
+        <div class="menu-item" onclick="abrirJogo('https://joabeplay1.github.io/domino-9999/')" style="cursor:pointer; background:var(--bg3); color:var(--text); border:1px solid var(--border); padding:8px 14px; border-radius:999px; font-weight:500; font-size:13px; display:flex; align-items:center; gap:6px;">🀫 Dominó</div>
+        <button class="btn-karaoke" onclick="renderFerramentas()">🔧 Ferramentas</button>
+        <button class="btn-karaoke" onclick="renderKaraoke()">🎙 Karaokê</button>
+        <button class="btn-add" onclick="openModal()">+ Adicionar</button>
+        <button class="logout-btn" onclick="doLogout()">Sair</button>
+      </div>
     </nav>
     <div class="main">
       <div id="heroWrap"></div>
